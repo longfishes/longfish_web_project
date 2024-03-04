@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/../cert-update-script/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../mybatis-project-quickstart/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../springboot-mybatis-crud/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../springboot-web-quickstart/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../ssm-spring-part/spring-ioc-xml-01/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../ssm-spring-part/spring-ioc-xml-01/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mybatis-project-quickstart/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mybatis-project-quickstart/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springboot-mybatis-crud/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springboot-mybatis-crud/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springboot-web-quickstart/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springboot-web-quickstart/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ssm-spring-part/spring-ioc-xml-01/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ssm-spring-part/spring-ioc-xml-01/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

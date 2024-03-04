@@ -8,13 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="maven-project01" />
+        <module name="tlias-web-management" />
+        <module name="cert-update-script" />
         <module name="maven-project02" />
         <module name="mybatis-project-quickstart" />
-        <module name="tlias-web-management" />
         <module name="spring-ioc-xml-01" />
-        <module name="cert-update-script" />
-        <module name="springboot-mybatis-crud" />
         <module name="cjcx" />
+        <module name="springboot-mybatis-crud" />
         <module name="springboot-web-quickstart" />
       </profile>
     </annotationProcessing>
