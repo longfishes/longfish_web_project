@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/cert-update-script/cert-update-script.iml" filepath="$PROJECT_DIR$/cert-update-script/cert-update-script.iml" />
       <module fileurl="file://$PROJECT_DIR$/cjcx/cjcx.iml" filepath="$PROJECT_DIR$/cjcx/cjcx.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../ddns/ddns.iml" filepath="$PROJECT_DIR$/../ddns/ddns.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ddns/ddns.iml" filepath="$PROJECT_DIR$/ddns/ddns.iml" />
       <module fileurl="file://$PROJECT_DIR$/javaweb-begin/javaweb-begin.iml" filepath="$PROJECT_DIR$/javaweb-begin/javaweb-begin.iml" />
       <module fileurl="file://$PROJECT_DIR$/maven-project01/maven-project01.iml" filepath="$PROJECT_DIR$/maven-project01/maven-project01.iml" />
       <module fileurl="file://$PROJECT_DIR$/maven-project02/maven-project02.iml" filepath="$PROJECT_DIR$/maven-project02/maven-project02.iml" />

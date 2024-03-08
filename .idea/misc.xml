@@ -24,7 +24,7 @@
         <option value="$PROJECT_DIR$/springboot-mybatis-crud/pom.xml" />
         <option value="$PROJECT_DIR$/ssm-spring-part/pom.xml" />
         <option value="$PROJECT_DIR$/cert-update-script/pom.xml" />
-        <option value="$PROJECT_DIR$/../ddns/pom.xml" />
+        <option value="$PROJECT_DIR$/ddns/pom.xml" />
       </list>
     </option>
   </component>
