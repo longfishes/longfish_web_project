@@ -9,17 +9,19 @@
         <outputRelativeToContentRoot value="true" />
         <module name="maven-project01" />
         <module name="tlias-web-management" />
-        <module name="cert-update-script" />
         <module name="maven-project02" />
         <module name="mybatis-project-quickstart" />
         <module name="spring-ioc-xml-01" />
+        <module name="cert-update-script" />
         <module name="cjcx" />
         <module name="springboot-mybatis-crud" />
+        <module name="ddns" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
       <module name="cert-update-script" target="17" />
       <module name="cjcx" target="17" />
+      <module name="ddns" target="17" />
       <module name="deno" target="17" />
       <module name="maven-project01" target="17" />
       <module name="maven-project02" target="11" />
@@ -34,6 +36,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="cert-update-script" options="" />
+      <module name="ddns" options="-parameters" />
       <module name="deno" options="-parameters" />
       <module name="mybatis-project-quickstart" options="-parameters" />
       <module name="springboot-mybatis-crud" options="-parameters" />

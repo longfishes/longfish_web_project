@@ -7,6 +7,18 @@
         <language minSize="65" name="Java" />
       </Languages>
     </inspection_tool>
+    <inspection_tool class="IncorrectHttpHeaderInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="customHeaders">
+        <set>
+          <option value="X-TC-Action" />
+          <option value="X-TC-Version" />
+          <option value="X-TC-Token" />
+          <option value="X-TC-Region" />
+          <option value="X-TC-Timestamp" />
+          <option value="X-TC-RequestClient" />
+        </set>
+      </option>
+    </inspection_tool>
     <inspection_tool class="InstantiationOfUtilityClass" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JavaDoc" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="TOP_LEVEL_CLASS_OPTIONS">
@@ -41,6 +53,7 @@
     </inspection_tool>
     <inspection_tool class="MavenModelInspection" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="MybatisXMapperXmlInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="RawUseOfParameterizedType" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SpringFacetInspection" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="checkTestFiles" value="false" />
     </inspection_tool>
