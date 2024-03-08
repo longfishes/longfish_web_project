@@ -21,6 +21,7 @@
     <bytecodeTargetLevel target="11">
       <module name="cert-update-script" target="17" />
       <module name="cjcx" target="17" />
+      <module name="deno" target="17" />
       <module name="maven-project01" target="17" />
       <module name="maven-project02" target="11" />
       <module name="mybatis-project-quickstart" target="17" />
@@ -34,6 +35,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="cert-update-script" options="" />
+      <module name="deno" options="-parameters" />
       <module name="mybatis-project-quickstart" options="-parameters" />
       <module name="springboot-mybatis-crud" options="-parameters" />
       <module name="springboot-web-quickstart" options="-parameters" />
