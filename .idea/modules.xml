@@ -10,7 +10,6 @@
       <module fileurl="file://$PROJECT_DIR$/mybatis-project-quickstart/mybatis-project-quickstart.iml" filepath="$PROJECT_DIR$/mybatis-project-quickstart/mybatis-project-quickstart.iml" />
       <module fileurl="file://$PROJECT_DIR$/ssm-spring-part/spring-ioc-xml-01/spring-ioc-xml-01.iml" filepath="$PROJECT_DIR$/ssm-spring-part/spring-ioc-xml-01/spring-ioc-xml-01.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot-mybatis-crud/springboot-mybatis-crud.iml" filepath="$PROJECT_DIR$/springboot-mybatis-crud/springboot-mybatis-crud.iml" />
-      <module fileurl="file://$PROJECT_DIR$/springboot-web-quickstart/springboot-web-quickstart.iml" filepath="$PROJECT_DIR$/springboot-web-quickstart/springboot-web-quickstart.iml" />
       <module fileurl="file://$PROJECT_DIR$/ssm-spring-part/ssm-spring-part.iml" filepath="$PROJECT_DIR$/ssm-spring-part/ssm-spring-part.iml" />
       <module fileurl="file://$PROJECT_DIR$/../桌面/day10-SpringBootWeb案例/代码/tlias-web-management/tlias-web-management.iml" filepath="$PROJECT_DIR$/../桌面/day10-SpringBootWeb案例/代码/tlias-web-management/tlias-web-management.iml" />
     </modules>

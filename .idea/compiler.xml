@@ -15,7 +15,6 @@
         <module name="spring-ioc-xml-01" />
         <module name="cjcx" />
         <module name="springboot-mybatis-crud" />
-        <module name="springboot-web-quickstart" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
