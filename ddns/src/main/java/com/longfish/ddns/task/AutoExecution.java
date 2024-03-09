@@ -1,6 +1,7 @@
 package com.longfish.ddns.task;
 
 import com.longfish.ddns.entity.CurIPv6;
+import com.longfish.ddns.properties.CustomerConfig;
 import com.longfish.ddns.service.DdnsService;
 import com.longfish.ddns.util.IPv6Util;
 import jakarta.annotation.PostConstruct;
@@ -15,6 +16,8 @@ public class AutoExecution {
 
     @Autowired
     private DdnsService ddnsService;
+    @Autowired
+    private CustomerConfig customerConfig;
 
     @PostConstruct
     public void init() {
@@ -23,9 +26,10 @@ public class AutoExecution {
         try {
             ddnsService.update(CurIPv6.IPv6);
         } catch (Exception e) {
-            log.info(e.getMessage());
+            log.warn(e.getMessage());
         }
         log.info("初始化完成");
+        log.info("通过域名 " + customerConfig.getSubDomain() + ".longfish.site 访问您本地计算机上的服务");
     }
 
     @Scheduled(cron = "0/5 * * * * ?")
@@ -35,7 +39,11 @@ public class AutoExecution {
             log.info("ip变化! : {} -> {}", CurIPv6.IPv6, ip);
             CurIPv6.IPv6 = ip;
             log.info("开始修改dns记录...");
-            ddnsService.update(ip);
+            try {
+                ddnsService.update(CurIPv6.IPv6);
+            } catch (Exception e) {
+                log.warn(e.getMessage());
+            }
         }
     }
 }

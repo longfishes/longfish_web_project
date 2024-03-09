@@ -29,6 +29,9 @@ public class DdnsServiceImpl implements DdnsService {
     @Override
     public void update(String ip) {
         RecordListResp recordListResp = RequestUtil.executeQuery(accessKey.getSecretId(), accessKey.getSecretKey());
+        if (recordListResp == null) {
+            throw new RuntimeException("网络错误");
+        }
         Response resp;
         List<RecordList> recordLists = new ArrayList<>();
         if (recordListResp.getRecordList() == null) {

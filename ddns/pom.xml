@@ -12,7 +12,7 @@
     <artifactId>ddns</artifactId>
     <version>1.0.2</version>
     <name>ddns</name>
-    <description>Demo project for Spring Boot</description>
+    <description>ddns</description>
     <properties>
         <java.version>17</java.version>
     </properties>

@@ -41,6 +41,10 @@ public class RequestUtil {
         }
 
         assert response != null;
+        if (response.get("Response") == null) {
+            log.error("网络错误！");
+            return null;
+        }
         return JSONObject.toJavaObject((JSON) response.get("Response"), RecordListResp.class);
     }
 
@@ -49,7 +53,7 @@ public class RequestUtil {
             String token = "";
             String version = "2021-03-23";
             String action = "ModifyRecord";
-            String body = "{\"Domain\":\"longfish.site\",\"RecordType\":\"AAAA\",\"RecordLine\":\"默认\",\"Value\":\""+ipv6+"\",\"RecordId\":"+recordId+",\"SubDomain\":\""+subdomain+"\"}";
+            String body = "{\"Domain\":\"longfish.site\",\"RecordType\":\"AAAA\",\"RecordLine\":\"默认\",\"Value\":\"" + ipv6 + "\",\"RecordId\":" + recordId + ",\"SubDomain\":\"" + subdomain + "\"}";
             String region = "";
             return doRequest(secretId, secretKey, version, action, body, region, token);
         } catch (IOException | NoSuchAlgorithmException e) {

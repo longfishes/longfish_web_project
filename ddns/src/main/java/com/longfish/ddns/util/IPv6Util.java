@@ -35,6 +35,10 @@ public class IPv6Util {
         } catch (SocketException e) {
             log.error("网络异常！, {}", e.getMessage());
         }
+        if (list.size() == 0) {
+            log.error("设备不支持ipv6！");
+            System.exit(-1);
+        }
         return list.get(0);
     }
 }
