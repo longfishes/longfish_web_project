@@ -1,4 +1,4 @@
 # Project exclude paths
 /target/
 *.class
-#ddns/src/main/resources/application.yml
+*.yml
