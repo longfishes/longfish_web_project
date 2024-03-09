@@ -10,4 +10,6 @@ import org.springframework.stereotype.Component;
 public class CustomerConfig {
 
     private String subDomain;
+
+    private String recordId;
 }
