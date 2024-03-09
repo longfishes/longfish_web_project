@@ -30,7 +30,10 @@ public class DdnsServiceImpl implements DdnsService {
         RecordListResp recordListResp = RequestUtil.executeQuery(accessKey.getSecretId(), accessKey.getSecretKey());
         Response resp;
         List<RecordList> recordLists = new ArrayList<>();
-
+        if (recordListResp.getRecordList() == null) {
+            log.error("密钥错误！");
+            System.exit(-1);
+        }
         recordListResp.getRecordList().forEach(record -> {
             if (record.getName().equals(customerConfig.getSubDomain()) && record.getStatus().equals("ENABLE")) {
                 if (!String.valueOf(record.getRecordId()).equals(customerConfig.getRecordId()))
@@ -42,7 +45,7 @@ public class DdnsServiceImpl implements DdnsService {
             log.error("子域名不可用！");
             System.exit(-1);
         } else {
-            if (recordValue.equals(ip)) {
+            if (recordValue != null && recordValue.equals(ip)) {
                 throw new RuntimeException("当前解析与ip地址一致，无需添加dns记录！");
             }
         }

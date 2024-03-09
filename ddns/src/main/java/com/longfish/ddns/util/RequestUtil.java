@@ -3,6 +3,7 @@ package com.longfish.ddns.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.longfish.ddns.entity.RecordListResp;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
 import javax.crypto.Mac;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.TimeZone;
 
+@Slf4j
 public class RequestUtil {
 
     public static RecordListResp executeQuery(String secretId, String secretKey) {
@@ -31,8 +33,11 @@ public class RequestUtil {
             assert resp.body() != null;
             JSON json = (JSON) JSON.parse(resp.body().string());
             response = JSONObject.toJavaObject(json, Map.class);
-        } catch (IOException | NoSuchAlgorithmException | InvalidKeyException e) {
-            e.printStackTrace();
+        } catch (IOException | NoSuchAlgorithmException e) {
+            log.error("网络错误！, {}", e.getMessage());
+        } catch (InvalidKeyException e) {
+            log.error("密钥错误！, {}", e.getMessage());
+            System.exit(-1);
         }
 
         assert response != null;
@@ -47,8 +52,11 @@ public class RequestUtil {
             String body = "{\"Domain\":\"longfish.site\",\"RecordType\":\"AAAA\",\"RecordLine\":\"默认\",\"Value\":\""+ipv6+"\",\"RecordId\":"+recordId+",\"SubDomain\":\""+subdomain+"\"}";
             String region = "";
             return doRequest(secretId, secretKey, version, action, body, region, token);
-        } catch (IOException | NoSuchAlgorithmException | InvalidKeyException e) {
-            e.printStackTrace();
+        } catch (IOException | NoSuchAlgorithmException e) {
+            log.error("网络错误！, {}", e.getMessage());
+        } catch (InvalidKeyException e) {
+            log.error("密钥错误！, {}", e.getMessage());
+            System.exit(-1);
         }
 
         return null;

@@ -1,5 +1,7 @@
 package com.longfish.ddns.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -8,6 +10,7 @@ import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
+@Slf4j
 public class IPv6Util {
 
     public static String getIpAddress() {
@@ -30,7 +33,7 @@ public class IPv6Util {
                 }
             }
         } catch (SocketException e) {
-            e.printStackTrace();
+            log.error("网络异常！, {}", e.getMessage());
         }
         return list.get(0);
     }
