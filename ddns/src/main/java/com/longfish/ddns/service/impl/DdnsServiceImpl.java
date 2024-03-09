@@ -11,6 +11,7 @@ import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,9 +52,19 @@ public class DdnsServiceImpl implements DdnsService {
         }
         resp = RequestUtil.executeDNS(accessKey.getSecretId(), accessKey.getSecretKey(), customerConfig.getRecordId(), ip, customerConfig.getSubDomain());
         assert resp != null;
-        if (resp.code() == 200) {
-            log.info("{}", resp);
-            log.info("dns记录添加成功！");
+        try {
+            if (resp.code() == 200) {
+                assert resp.body() != null;
+                if (!resp.body().string().contains("Error")) {
+                    log.info("{}", resp);
+                    log.info("dns记录添加成功！");
+                } else {
+                    log.error("Invaded Record ID!");
+                    System.exit(-1);
+                }
+            }
+        } catch (IOException e) {
+            log.error("网络错误！, {}", e.getMessage());
         }
     }
 }
