@@ -28,7 +28,7 @@ public class DdnsServiceImpl implements DdnsService {
 
     @Override
     public void update(String ip) {
-        RecordListResp recordListResp = RequestUtil.executeQuery(accessKey.getSecretId(), accessKey.getSecretKey());
+        RecordListResp recordListResp = RequestUtil.executeQuery(accessKey.getSecretId(), accessKey.getSecretKey(), customerConfig.getDomain());
         if (recordListResp == null) {
             throw new RuntimeException("网络错误");
         }
@@ -50,10 +50,15 @@ public class DdnsServiceImpl implements DdnsService {
             System.exit(-1);
         } else {
             if (recordValue != null && recordValue.equals(ip)) {
-                throw new RuntimeException("当前解析与ip地址一致，无需添加dns记录！");
+                log.info("当前解析与ip地址一致，无需添加dns记录！");
+                return;
             }
         }
-        resp = RequestUtil.executeDNS(accessKey.getSecretId(), accessKey.getSecretKey(), customerConfig.getRecordId(), ip, customerConfig.getSubDomain());
+        resp = RequestUtil.executeDNS(accessKey.getSecretId(),
+                accessKey.getSecretKey(),
+                customerConfig.getRecordId(), ip,
+                customerConfig.getSubDomain(),
+                customerConfig.getDomain());
         assert resp != null;
         try {
             if (resp.code() == 200) {

@@ -18,7 +18,7 @@ public class ApplicationTest {
 
     @Test
     public void testReq() {
-        RecordListResp recordListResp = RequestUtil.executeQuery(accessKey.getSecretId(), accessKey.getSecretKey());
+        RecordListResp recordListResp = RequestUtil.executeQuery(accessKey.getSecretId(), accessKey.getSecretKey(), "longfish.site");
 
         System.out.println(recordListResp.getRecordList());
 
@@ -30,6 +30,7 @@ public class ApplicationTest {
     }
 
     @Test
+    @SuppressWarnings("all")
     public void testUpdate() {
         try {
             ddnsService.update("::1");

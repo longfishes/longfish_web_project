@@ -8,4 +8,9 @@ public class AppTest {
     public void testIO() {
 
     }
+
+    @Test
+    public void test1() {
+        System.out.println("helloworld");
+    }
 }

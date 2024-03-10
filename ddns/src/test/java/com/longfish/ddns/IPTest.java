@@ -37,7 +37,7 @@ public class IPTest {
 
     @Test
     public void test1() {
-        System.out.println(getIpAddress().get(0));
+        System.out.println(getIpAddress());
     }
 
     @Test

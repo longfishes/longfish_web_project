@@ -3,8 +3,10 @@ package com.longfish.ddns.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.longfish.ddns.entity.RecordListResp;
+import com.longfish.ddns.properties.CustomerConfig;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -21,13 +23,13 @@ import java.util.TimeZone;
 @Slf4j
 public class RequestUtil {
 
-    public static RecordListResp executeQuery(String secretId, String secretKey) {
+    public static RecordListResp executeQuery(String secretId, String secretKey, String domain) {
         Map response = null;
         try {
             String token = "";
             String version = "2021-03-23";
             String action = "DescribeRecordList";
-            String body = "{\"Domain\":\"longfish.site\"}";
+            String body = "{\"Domain\":\"" + domain + "\"}";
             String region = "";
             Response resp = doRequest(secretId, secretKey, version, action, body, region, token);
             assert resp.body() != null;
@@ -48,12 +50,12 @@ public class RequestUtil {
         return JSONObject.toJavaObject((JSON) response.get("Response"), RecordListResp.class);
     }
 
-    public static Response executeDNS(String secretId, String secretKey, String recordId, String ipv6, String subdomain) {
+    public static Response executeDNS(String secretId, String secretKey, String recordId, String ipv6, String subdomain, String domain) {
         try {
             String token = "";
             String version = "2021-03-23";
             String action = "ModifyRecord";
-            String body = "{\"Domain\":\"longfish.site\",\"RecordType\":\"AAAA\",\"RecordLine\":\"默认\",\"Value\":\"" + ipv6 + "\",\"RecordId\":" + recordId + ",\"SubDomain\":\"" + subdomain + "\"}";
+            String body = "{\"Domain\":\"" + domain + "\",\"RecordType\":\"AAAA\",\"RecordLine\":\"默认\",\"Value\":\"" + ipv6 + "\",\"RecordId\":" + recordId + ",\"SubDomain\":\"" + subdomain + "\"}";
             String region = "";
             return doRequest(secretId, secretKey, version, action, body, region, token);
         } catch (IOException | NoSuchAlgorithmException e) {

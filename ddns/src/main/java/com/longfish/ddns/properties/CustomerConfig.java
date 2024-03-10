@@ -12,4 +12,6 @@ public class CustomerConfig {
     private String subDomain;
 
     private String recordId;
+
+    private String domain;
 }

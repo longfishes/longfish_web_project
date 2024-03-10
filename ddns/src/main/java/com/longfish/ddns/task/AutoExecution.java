@@ -23,13 +23,19 @@ public class AutoExecution {
     public void init() {
         CurIPv6.IPv6 = IPv6Util.getIpAddress();
         log.info("开始执行任务，获取到当前ipv6为: {}", CurIPv6.IPv6);
-        try {
-            ddnsService.update(CurIPv6.IPv6);
-        } catch (Exception e) {
-            log.warn(e.getMessage());
+        boolean flag = false;
+        while (true) {
+            try {
+                if (flag) Thread.sleep(5000);
+                flag = true;
+                ddnsService.update(CurIPv6.IPv6);
+                break;
+            } catch (Exception e) {
+                log.warn(e.getMessage());
+            }
         }
         log.info("初始化完成");
-        log.info("通过域名 " + customerConfig.getSubDomain() + ".longfish.site 访问您本地计算机上的服务");
+        log.info("通过域名 " + customerConfig.getSubDomain() + "." + customerConfig.getDomain() +" 访问您本地计算机上的服务");
     }
 
     @Scheduled(cron = "0/5 * * * * ?")
@@ -39,10 +45,13 @@ public class AutoExecution {
             log.info("ip变化! : {} -> {}", CurIPv6.IPv6, ip);
             CurIPv6.IPv6 = ip;
             log.info("开始修改dns记录...");
-            try {
-                ddnsService.update(CurIPv6.IPv6);
-            } catch (Exception e) {
-                log.warn(e.getMessage());
+            while (true) {
+                try {
+                    ddnsService.update(CurIPv6.IPv6);
+                    break;
+                } catch (Exception e) {
+                    log.warn(e.getMessage());
+                }
             }
         }
     }
