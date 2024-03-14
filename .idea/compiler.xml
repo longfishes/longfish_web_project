@@ -16,6 +16,7 @@
         <module name="cjcx" />
         <module name="springboot-mybatis-crud" />
         <module name="ddns-config" />
+        <module name="minecraft-plugin-start" />
         <module name="ddns" />
         <module name="dependency-test" />
       </profile>
@@ -29,6 +30,7 @@
       <module name="dependency-test" target="17" />
       <module name="maven-project01" target="17" />
       <module name="maven-project02" target="11" />
+      <module name="minecraft-plugin-start" target="1.8" />
       <module name="mybatis-project-quickstart" target="17" />
       <module name="spring-ioc-xml-01" target="17" />
       <module name="springboot-mybatis-crud" target="17" />
