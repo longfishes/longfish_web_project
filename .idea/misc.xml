@@ -33,6 +33,7 @@
         <option value="$PROJECT_DIR$/ddns-config/pom.xml" />
         <option value="$PROJECT_DIR$/dependency-test/pom.xml" />
         <option value="$PROJECT_DIR$/minecraft-plugin-start/pom.xml" />
+        <option value="$PROJECT_DIR$/rabbitmq-demo/pom.xml" />
       </list>
     </option>
   </component>

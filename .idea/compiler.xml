@@ -7,17 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="maven-project01" />
-        <module name="tlias-web-management" />
-        <module name="maven-project02" />
         <module name="mybatis-project-quickstart" />
-        <module name="spring-ioc-xml-01" />
         <module name="cert-update-script" />
-        <module name="cjcx" />
         <module name="springboot-mybatis-crud" />
+        <module name="rabbitmq-demo" />
         <module name="ddns-config" />
         <module name="minecraft-plugin-start" />
         <module name="ddns" />
+        <module name="maven-project01" />
+        <module name="tlias-web-management" />
+        <module name="maven-project02" />
+        <module name="spring-ioc-xml-01" />
+        <module name="cjcx" />
         <module name="dependency-test" />
       </profile>
     </annotationProcessing>
@@ -32,6 +33,7 @@
       <module name="maven-project02" target="11" />
       <module name="minecraft-plugin-start" target="1.8" />
       <module name="mybatis-project-quickstart" target="17" />
+      <module name="rabbitmq-demo" target="17" />
       <module name="spring-ioc-xml-01" target="17" />
       <module name="springboot-mybatis-crud" target="17" />
       <module name="springboot-web-quickstart" target="17" />
@@ -46,6 +48,7 @@
       <module name="ddns" options="-parameters" />
       <module name="deno" options="-parameters" />
       <module name="mybatis-project-quickstart" options="-parameters" />
+      <module name="rabbitmq-demo" options="-parameters" />
       <module name="springboot-mybatis-crud" options="-parameters" />
       <module name="springboot-web-quickstart" options="-parameters" />
       <module name="tlias-web-management" options="-parameters" />

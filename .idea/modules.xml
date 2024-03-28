@@ -12,6 +12,7 @@
       <module fileurl="file://$PROJECT_DIR$/maven-project02/maven-project02.iml" filepath="$PROJECT_DIR$/maven-project02/maven-project02.iml" />
       <module fileurl="file://$PROJECT_DIR$/minecraft-plugin-start/minecraft-plugin-start.iml" filepath="$PROJECT_DIR$/minecraft-plugin-start/minecraft-plugin-start.iml" />
       <module fileurl="file://$PROJECT_DIR$/mybatis-project-quickstart/mybatis-project-quickstart.iml" filepath="$PROJECT_DIR$/mybatis-project-quickstart/mybatis-project-quickstart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rabbitmq-demo/rabbitmq-demo.iml" filepath="$PROJECT_DIR$/rabbitmq-demo/rabbitmq-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/ssm-spring-part/spring-ioc-xml-01/spring-ioc-xml-01.iml" filepath="$PROJECT_DIR$/ssm-spring-part/spring-ioc-xml-01/spring-ioc-xml-01.iml" />
       <module fileurl="file://$PROJECT_DIR$/springboot-mybatis-crud/springboot-mybatis-crud.iml" filepath="$PROJECT_DIR$/springboot-mybatis-crud/springboot-mybatis-crud.iml" />
       <module fileurl="file://$PROJECT_DIR$/ssm-spring-part/ssm-spring-part.iml" filepath="$PROJECT_DIR$/ssm-spring-part/ssm-spring-part.iml" />
