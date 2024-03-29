@@ -41,7 +41,7 @@ class RabbitmqDemoApplicationTests {
 
     @Test
     public void testSend() {
-        String username = "longfishes@qq.com";
+        String username = "spieny-dev@qq.com";
         Map<String, Object> map = new HashMap<>();
         map.put("content", "测试2");
         EmailDTO emailDTO = EmailDTO.builder()

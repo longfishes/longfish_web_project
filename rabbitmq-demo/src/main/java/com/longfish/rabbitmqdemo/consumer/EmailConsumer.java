@@ -12,7 +12,7 @@ import static com.longfish.rabbitmqdemo.constant.RabbitMQConstant.*;
 
 @Component
 @RabbitListener(queues = EMAIL_QUEUE)
-public class CommentNoticeConsumer {
+public class EmailConsumer {
 
     @Autowired
     private EmailUtil emailUtil;
