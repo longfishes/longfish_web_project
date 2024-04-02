@@ -14,6 +14,7 @@
         <module name="ddns-config" />
         <module name="minecraft-plugin-start" />
         <module name="ddns" />
+        <module name="jc-login-demo" />
         <module name="maven-project01" />
         <module name="tlias-web-management" />
         <module name="maven-project02" />
@@ -29,6 +30,7 @@
       <module name="ddns-config" target="17" />
       <module name="deno" target="17" />
       <module name="dependency-test" target="17" />
+      <module name="jc-login-demo" target="17" />
       <module name="maven-project01" target="17" />
       <module name="maven-project02" target="11" />
       <module name="minecraft-plugin-start" target="1.8" />
@@ -47,6 +49,7 @@
       <module name="cert-update-script" options="" />
       <module name="ddns" options="-parameters" />
       <module name="deno" options="-parameters" />
+      <module name="jc-login-demo" options="-parameters" />
       <module name="mybatis-project-quickstart" options="-parameters" />
       <module name="rabbitmq-demo" options="-parameters" />
       <module name="springboot-mybatis-crud" options="-parameters" />
