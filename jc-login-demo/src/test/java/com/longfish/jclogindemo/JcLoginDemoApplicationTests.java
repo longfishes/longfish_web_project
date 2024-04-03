@@ -63,7 +63,7 @@ class JcLoginDemoApplicationTests {
         EmailDTO emailDTO = EmailDTO.builder()
                 .email(username)
                 .subject("消息队列测试")
-                .template("common.html")
+                .template("code.html")
                 .commentMap(map)
                 .build();
         System.out.println(emailDTO);
@@ -78,7 +78,7 @@ class JcLoginDemoApplicationTests {
         EmailDTO emailDTO = EmailDTO.builder()
                 .email(username)
                 .subject("测试标题")
-                .template("common.html")
+                .template("code.html")
                 .commentMap(map)
                 .build();
         System.out.println(emailDTO);

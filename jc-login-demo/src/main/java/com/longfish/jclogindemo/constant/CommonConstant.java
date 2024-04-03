@@ -7,4 +7,6 @@ public interface CommonConstant {
     String CODE_ERROR = "验证码错误";
 
     String CODE = "CODE";
+
+    String USER_ID = "userId";
 }

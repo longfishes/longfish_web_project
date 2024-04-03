@@ -10,17 +10,20 @@ import com.longfish.jclogindemo.pojo.dto.UserRegDTO;
 import com.longfish.jclogindemo.pojo.vo.UserLoginVO;
 import com.longfish.jclogindemo.service.UserAuthService;
 import com.longfish.jclogindemo.util.CodeRedisUtil;
+import com.longfish.jclogindemo.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static com.longfish.jclogindemo.constant.CommonConstant.CODE_ERROR;
-import static com.longfish.jclogindemo.constant.CommonConstant.PATTERN;
+import static com.longfish.jclogindemo.constant.CommonConstant.*;
 
 @Service
 @Slf4j
@@ -31,6 +34,12 @@ public class UserAuthServiceImpl implements UserAuthService {
 
     @Autowired
     private CodeRedisUtil codeRedisUtil;
+
+    @Value("${jwt.secret-key}")
+    private String secretKey;
+
+    @Value("${jwt.ttl}")
+    private Long ttl;
 
     @Override
     public UserLoginVO login(UserLoginDTO userLoginDTO) {
@@ -46,8 +55,15 @@ public class UserAuthServiceImpl implements UserAuthService {
         if (userAuthList.size() != 1) {
             throw new BizException(StatusCodeEnum.FAIL);
         }
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(USER_ID, userAuthList.get(0));
+        String token = JwtUtil.createJWT(
+                secretKey,
+                ttl,
+                claims);
         return UserLoginVO.builder()
-                .jwt("test")
+                .jwt(token)
                 .build();
     }
 

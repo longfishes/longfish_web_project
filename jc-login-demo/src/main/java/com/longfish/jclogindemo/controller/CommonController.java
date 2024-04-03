@@ -47,7 +47,7 @@ public class CommonController {
         EmailDTO emailDTO = EmailDTO.builder()
                 .email(username)
                 .subject("验证码")
-                .template("common.html")
+                .template("code.html")
                 .commentMap(map)
                 .build();
         rabbitTemplate.convertAndSend(RabbitMQConstant.EMAIL_EXCHANGE, "*", new Message(JSON.toJSONBytes(emailDTO), new MessageProperties()));
