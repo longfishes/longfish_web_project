@@ -16,6 +16,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -55,7 +56,7 @@ public class UserAuthServiceImpl implements UserAuthService {
         if (userAuthList.size() != 1) {
             throw new BizException(StatusCodeEnum.USER_NOT_EXIST);
         }
-        if (!userLoginDTO.getPassword().equals(userAuthList.get(0).getPassword())) {
+        if (!DigestUtils.md5DigestAsHex(userLoginDTO.getPassword().getBytes()).equals(userAuthList.get(0).getPassword())) {
             throw new BizException(StatusCodeEnum.PASSWORD_ERROR);
         }
         Map<String, Object> claims = new HashMap<>();
@@ -80,6 +81,7 @@ public class UserAuthServiceImpl implements UserAuthService {
             throw new BizException(StatusCodeEnum.CODE_ERROR);
         }
         UserAuth userAuth = new UserAuth();
+        userAuth.setPassword(DigestUtils.md5DigestAsHex(userAuth.getPassword().getBytes()));
         BeanUtils.copyProperties(userRegDTO, userAuth);
         userAuth.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)));
         userAuth.setUpdateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)));
@@ -99,7 +101,7 @@ public class UserAuthServiceImpl implements UserAuthService {
         UserAuth userAuth = users.get(0);
         UserAuth auth = UserAuth.builder()
                 .id(userAuth.getId())
-                .password(passwordDTO.getNewPassword())
+                .password(DigestUtils.md5DigestAsHex(passwordDTO.getNewPassword().getBytes()))
                 .updateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)))
                 .build();
         userAuthMapper.updateById(auth);
@@ -115,12 +117,12 @@ public class UserAuthServiceImpl implements UserAuthService {
             throw new BizException(StatusCodeEnum.USER_NOT_EXIST);
         }
         UserAuth userAuth = userAuthList.get(0);
-        if (!passwordDTO.getOldPassword().equals(userAuth.getPassword())) {
+        if (!DigestUtils.md5DigestAsHex(passwordDTO.getOldPassword().getBytes()).equals(userAuth.getPassword())) {
             throw new BizException(StatusCodeEnum.PASSWORD_ERROR);
         }
         UserAuth auth = UserAuth.builder()
                 .id(userAuth.getId())
-                .password(passwordDTO.getNewPassword())
+                .password(DigestUtils.md5DigestAsHex(passwordDTO.getNewPassword().getBytes()))
                 .updateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)))
                 .build();
         userAuthMapper.updateById(auth);

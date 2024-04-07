@@ -31,16 +31,16 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
-        if(((HandlerMethod) handler).getBean().getClass().getName().contains("org.springdoc")) {
+        if (((HandlerMethod) handler).getBean().getClass().getName().contains("org.springdoc")) {
             return true;
         }
 
         String token = req.getHeader(tokenName);
         try {
-            log.info("jwt校验:{}", token);
+            log.info("jwt check: {}", token);
             Claims claims = JwtUtil.parseJWT(secretKey, token);
             Long userId = Long.valueOf(claims.get(USER_ID).toString());
-            log.info("当前用户id：{}", userId);
+            log.info("current id: {}", userId);
             BaseContext.setCurrentId(userId);
             return true;
 

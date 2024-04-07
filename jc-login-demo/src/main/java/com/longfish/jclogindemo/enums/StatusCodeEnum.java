@@ -9,7 +9,9 @@ public enum StatusCodeEnum {
 
     SUCCESS(200, "操作成功"),
 
-    FAIL(500, "操作失败"),
+    FAIL(0, "操作失败"),
+
+    NOT_FOUND(404, "not found"),
 
     PASSWORD_ERROR(40001, "密码错误"),
 

@@ -8,7 +8,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 @SuppressWarnings("all")
-public class RedisConfiguration {
+public class RedisConfig {
 
     @Bean
     public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory){
