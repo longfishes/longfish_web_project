@@ -23,7 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.longfish.jclogindemo.constant.CommonConstant.*;
+import static com.longfish.jclogindemo.constant.CommonConstant.PATTERN;
+import static com.longfish.jclogindemo.constant.CommonConstant.USER_ID;
 
 @Service
 @Slf4j
@@ -44,20 +45,21 @@ public class UserAuthServiceImpl implements UserAuthService {
     @Override
     public UserLoginVO login(UserLoginDTO userLoginDTO) {
         if (userLoginDTO.getUsername() == null || userLoginDTO.getPassword() == null) {
-            throw new BizException(StatusCodeEnum.FAIL);
+            throw new BizException(StatusCodeEnum.USER_NAME_OR_PASSWORD_IS_NULL);
         }
         log.info("用户 {} 登录 @ {}", userLoginDTO, LocalDateTime.now());
         UserAuth userAuth = UserAuth.builder()
                 .username(userLoginDTO.getUsername())
-                .password(userLoginDTO.getPassword())
                 .build();
         List<UserAuth> userAuthList = userAuthMapper.select(userAuth);
         if (userAuthList.size() != 1) {
-            throw new BizException(StatusCodeEnum.FAIL);
+            throw new BizException(StatusCodeEnum.USER_NOT_EXIST);
         }
-
+        if (!userLoginDTO.getPassword().equals(userAuthList.get(0).getPassword())) {
+            throw new BizException(StatusCodeEnum.PASSWORD_ERROR);
+        }
         Map<String, Object> claims = new HashMap<>();
-        claims.put(USER_ID, userAuthList.get(0));
+        claims.put(USER_ID, userAuthList.get(0).getId());
         String token = JwtUtil.createJWT(
                 secretKey,
                 ttl,
@@ -69,13 +71,13 @@ public class UserAuthServiceImpl implements UserAuthService {
 
     @Override
     public void register(UserRegDTO userRegDTO) {
-        String code = codeRedisUtil.get(userRegDTO.getUsername());
-        if (code == null || !code.equals(userRegDTO.getCode())){
-            throw new BizException(CODE_ERROR);
-        }
         List<UserAuth> users = userAuthMapper.select(UserAuth.builder().username(userRegDTO.getUsername()).build());
         if (users != null && users.size() != 0) {
-            throw new BizException(StatusCodeEnum.USERNAME_EXIST);
+            throw new BizException(StatusCodeEnum.USER_EXIST);
+        }
+        String code = codeRedisUtil.get(userRegDTO.getUsername());
+        if (code == null || !code.equals(userRegDTO.getCode())){
+            throw new BizException(StatusCodeEnum.CODE_ERROR);
         }
         UserAuth userAuth = new UserAuth();
         BeanUtils.copyProperties(userRegDTO, userAuth);
@@ -88,11 +90,11 @@ public class UserAuthServiceImpl implements UserAuthService {
     public void forgot(PasswordDTO passwordDTO) {
         List<UserAuth> users = userAuthMapper.select(UserAuth.builder().username(passwordDTO.getUsername()).build());
         if (users == null || users.size() == 0) {
-            throw new BizException(StatusCodeEnum.USERNAME_NOT_EXIST);
+            throw new BizException(StatusCodeEnum.USER_NOT_EXIST);
         }
         String code = codeRedisUtil.get(passwordDTO.getUsername());
         if (code == null || !code.equals(passwordDTO.getCode())){
-            throw new BizException(CODE_ERROR);
+            throw new BizException(StatusCodeEnum.CODE_ERROR);
         }
         UserAuth userAuth = users.get(0);
         UserAuth auth = UserAuth.builder()
@@ -110,7 +112,7 @@ public class UserAuthServiceImpl implements UserAuthService {
                 .username(passwordDTO.getUsername())
                 .build());
         if (userAuthList == null || userAuthList.size() == 0) {
-            throw new BizException(StatusCodeEnum.USERNAME_NOT_EXIST);
+            throw new BizException(StatusCodeEnum.USER_NOT_EXIST);
         }
         UserAuth userAuth = userAuthList.get(0);
         if (!passwordDTO.getOldPassword().equals(userAuth.getPassword())) {

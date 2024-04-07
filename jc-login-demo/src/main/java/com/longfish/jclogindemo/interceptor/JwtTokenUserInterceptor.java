@@ -1,6 +1,8 @@
 package com.longfish.jclogindemo.interceptor;
 
 import com.longfish.jclogindemo.context.BaseContext;
+import com.longfish.jclogindemo.enums.StatusCodeEnum;
+import com.longfish.jclogindemo.exception.BizException;
 import com.longfish.jclogindemo.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,10 +15,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import static com.longfish.jclogindemo.constant.CommonConstant.USER_ID;
 
-
-/**
- * jwt令牌校验的拦截器
- */
 @Component
 @Slf4j
 public class JwtTokenUserInterceptor implements HandlerInterceptor {
@@ -27,22 +25,17 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
     @Value("${jwt.token-name}")
     private String tokenName;
 
-    /**
-     * 校验jwt
-     *
-     * @param req 请求
-     * @param resp 响应
-     * @param handler 处理器
-     * @return 布尔类型
-     */
     @Override
     @SuppressWarnings("all")
     public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) {
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
-        String token = req.getHeader(tokenName);
+        if(((HandlerMethod) handler).getBean().getClass().getName().contains("org.springdoc")) {
+            return true;
+        }
 
+        String token = req.getHeader(tokenName);
         try {
             log.info("jwt校验:{}", token);
             Claims claims = JwtUtil.parseJWT(secretKey, token);
@@ -52,8 +45,8 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
             return true;
 
         } catch (Exception ex) {
-            resp.setStatus(401);
-            return false;
+            resp.setStatus(StatusCodeEnum.AUTHORIZED.getCode());
+            throw new BizException(StatusCodeEnum.AUTHORIZED);
         }
     }
 }
