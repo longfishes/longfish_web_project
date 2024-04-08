@@ -24,11 +24,11 @@ public class EmailController {
     public String sendEmail() {
         String username = "longfishes@qq.com";
         Map<String, Object> map = new HashMap<>();
-        map.put("content", "测试2");
+        map.put("commontest", "测试2");
         EmailDTO emailDTO = EmailDTO.builder()
                 .email(username)
                 .subject("消息队列测试")
-                .template("commontest.html")
+                .template("code.html")
                 .commentMap(map)
                 .build();
         System.out.println(emailDTO);
