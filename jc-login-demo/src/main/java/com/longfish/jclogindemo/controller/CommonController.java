@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.longfish.jclogindemo.constant.RabbitMQConstant;
 import com.longfish.jclogindemo.pojo.Result;
 import com.longfish.jclogindemo.pojo.dto.EmailDTO;
-import com.longfish.jclogindemo.util.CodeRedisUtil;
 import com.longfish.jclogindemo.util.RandomUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -31,9 +30,6 @@ public class CommonController {
     private RabbitTemplate rabbitTemplate;
 
     @Autowired
-    private CodeRedisUtil codeRedisUtil;
-
-    @Autowired
     private RandomUtil randomUtil;
 
     @Operation(summary = "发送邮箱验证码")
@@ -52,7 +48,7 @@ public class CommonController {
                 .commentMap(map)
                 .build();
         rabbitTemplate.convertAndSend(RabbitMQConstant.EMAIL_EXCHANGE, "*", new Message(JSON.toJSONBytes(emailDTO), new MessageProperties()));
-        codeRedisUtil.insert(username, code);
+
         return Result.success();
     }
 

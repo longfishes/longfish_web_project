@@ -2,6 +2,7 @@ package com.longfish.jclogindemo.consumer;
 
 import com.alibaba.fastjson.JSON;
 import com.longfish.jclogindemo.pojo.dto.EmailDTO;
+import com.longfish.jclogindemo.util.CodeRedisUtil;
 import com.longfish.jclogindemo.util.EmailUtil;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -17,10 +18,14 @@ public class EmailConsumer {
     @Autowired
     private EmailUtil emailUtil;
 
+    @Autowired
+    private CodeRedisUtil codeRedisUtil;
+
     @RabbitHandler
     public void process(byte[] data) {
         EmailDTO emailDTO = JSON.parseObject(new String(data), EmailDTO.class);
         emailUtil.sendHtmlMail(emailDTO);
+        codeRedisUtil.insert(emailDTO.getEmail(), (String) emailDTO.getCommentMap().get("content"));
     }
 
 }
