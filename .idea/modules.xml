@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/ddns/ddns.iml" filepath="$PROJECT_DIR$/ddns/ddns.iml" />
       <module fileurl="file://$PROJECT_DIR$/ddns-config/ddns-config.iml" filepath="$PROJECT_DIR$/ddns-config/ddns-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/dependency-test/dependency-test.iml" filepath="$PROJECT_DIR$/dependency-test/dependency-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-demo/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/cloud-demo/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/javaweb-begin/javaweb-begin.iml" filepath="$PROJECT_DIR$/javaweb-begin/javaweb-begin.iml" />
       <module fileurl="file://$PROJECT_DIR$/jc-login-demo/jc-login-demo.iml" filepath="$PROJECT_DIR$/jc-login-demo/jc-login-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/maven-project01/maven-project01.iml" filepath="$PROJECT_DIR$/maven-project01/maven-project01.iml" />

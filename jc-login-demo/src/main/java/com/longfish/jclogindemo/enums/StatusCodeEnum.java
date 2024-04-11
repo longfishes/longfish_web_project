@@ -23,9 +23,9 @@ public enum StatusCodeEnum {
 
     USER_NOT_EXIST(40002, "用户不存在"),
 
-    USER_NAME_OR_PASSWORD_IS_NULL(40003, "用户名或密码不能为空"),
-
     AUTHORIZED(40300, "没有操作权限"),
+
+    METHOD_NOT_ALLOWED(40500, "请求方法不允许"),
 
     SYSTEM_ERROR(50000, "系统异常"),
 

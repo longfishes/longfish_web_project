@@ -1,5 +1,6 @@
 package com.longfish.jclogindemo.pojo.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserRegDTO {
 
+    @JsonIgnore
     private Long id;
 
     private String username;
@@ -19,7 +21,9 @@ public class UserRegDTO {
 
     private String code;
 
+    @JsonIgnore
     private String createTime;
 
+    @JsonIgnore
     private String updateTime;
 }

@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Component
 public class EmailUtil {
 
@@ -38,6 +41,13 @@ public class EmailUtil {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean check(String email) {
+        String EMAIL_PATTERN = "^[A-Za-z0-9_]+([.\\-][A-Za-z0-9_]+)*@[A-Za-z0-9]+([.\\-][A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
 }

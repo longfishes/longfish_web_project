@@ -45,8 +45,8 @@ class JcLoginDemoApplicationTests {
     @Test
     @SuppressWarnings("all")
     public void testRedis2() {
-        codeRedisUtil.insert("longfishes@qq.com", String.valueOf(222222));
-        System.out.println(codeRedisUtil.get("longfishes@qq.com"));
+        codeRedisUtil.insert("3327407524@qq.com", String.valueOf(222222));
+        System.out.println(codeRedisUtil.get("3327407524@qq.com"));
     }
 
     @Test

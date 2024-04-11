@@ -45,7 +45,7 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
             return true;
 
         } catch (Exception ex) {
-            resp.setStatus(StatusCodeEnum.AUTHORIZED.getCode());
+            resp.setStatus(401);
             throw new BizException(StatusCodeEnum.AUTHORIZED);
         }
     }

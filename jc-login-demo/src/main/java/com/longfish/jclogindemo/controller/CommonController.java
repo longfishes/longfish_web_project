@@ -2,8 +2,11 @@ package com.longfish.jclogindemo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.longfish.jclogindemo.constant.RabbitMQConstant;
+import com.longfish.jclogindemo.enums.StatusCodeEnum;
+import com.longfish.jclogindemo.exception.BizException;
 import com.longfish.jclogindemo.pojo.Result;
 import com.longfish.jclogindemo.pojo.dto.EmailDTO;
+import com.longfish.jclogindemo.util.EmailUtil;
 import com.longfish.jclogindemo.util.RandomUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -13,10 +16,7 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,12 +32,18 @@ public class CommonController {
     @Autowired
     private RandomUtil randomUtil;
 
+    @Autowired
+    private EmailUtil emailUtil;
+
     @Operation(summary = "发送邮箱验证码")
     @PostMapping("/code")
     @Parameters({
             @Parameter(name = "username", description = "用户名", required = true)
     })
     public Result sendCode(String username) {
+        if (!emailUtil.check(username)) {
+            throw new BizException(StatusCodeEnum.VALID_ERROR);
+        }
         Map<String, Object> map = new HashMap<>();
         String code = randomUtil.getRandomCode();
         map.put("content", code);

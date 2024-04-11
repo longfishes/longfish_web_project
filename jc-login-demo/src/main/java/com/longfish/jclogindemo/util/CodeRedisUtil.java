@@ -9,17 +9,16 @@ import java.util.concurrent.TimeUnit;
 import static com.longfish.jclogindemo.constant.CommonConstant.CODE;
 
 @Component
+@SuppressWarnings("all")
 public class CodeRedisUtil {
 
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @SuppressWarnings("all")
     public void insert(String username, String code) {
         redisTemplate.opsForValue().set(CODE + "::" + username, code, 15, TimeUnit.MINUTES);
     }
 
-    @SuppressWarnings("all")
     public String get(String username) {
         Object code = redisTemplate.opsForValue().get(CODE + "::" + username);
         if (code != null) return (String) code;

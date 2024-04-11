@@ -15,6 +15,7 @@
         <module name="minecraft-plugin-start" />
         <module name="ddns" />
         <module name="user-service" />
+        <module name="eureka-server" />
         <module name="jc-login-demo" />
         <module name="maven-project01" />
         <module name="tlias-web-management" />
@@ -33,6 +34,7 @@
       <module name="ddns-config" target="17" />
       <module name="deno" target="17" />
       <module name="dependency-test" target="17" />
+      <module name="eureka-server" target="8" />
       <module name="jc-login-demo" target="17" />
       <module name="maven-project01" target="17" />
       <module name="maven-project02" target="11" />
@@ -54,6 +56,7 @@
       <module name="cert-update-script" options="" />
       <module name="ddns" options="-parameters" />
       <module name="deno" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
       <module name="jc-login-demo" options="-parameters" />
       <module name="mybatis-project-quickstart" options="-parameters" />
       <module name="order-service" options="-parameters" />

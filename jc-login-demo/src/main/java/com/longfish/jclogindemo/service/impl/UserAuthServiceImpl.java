@@ -45,9 +45,6 @@ public class UserAuthServiceImpl implements UserAuthService {
 
     @Override
     public UserLoginVO login(UserLoginDTO userLoginDTO) {
-        if (userLoginDTO.getUsername() == null || userLoginDTO.getPassword() == null) {
-            throw new BizException(StatusCodeEnum.USER_NAME_OR_PASSWORD_IS_NULL);
-        }
         log.info("用户 {} 登录 @ {}", userLoginDTO, LocalDateTime.now());
         UserAuth userAuth = UserAuth.builder()
                 .username(userLoginDTO.getUsername())
@@ -81,8 +78,8 @@ public class UserAuthServiceImpl implements UserAuthService {
             throw new BizException(StatusCodeEnum.CODE_ERROR);
         }
         UserAuth userAuth = new UserAuth();
-        userAuth.setPassword(DigestUtils.md5DigestAsHex(userAuth.getPassword().getBytes()));
         BeanUtils.copyProperties(userRegDTO, userAuth);
+        userAuth.setPassword(DigestUtils.md5DigestAsHex(userRegDTO.getPassword().getBytes()));
         userAuth.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)));
         userAuth.setUpdateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)));
         userAuthMapper.insert(userAuth);

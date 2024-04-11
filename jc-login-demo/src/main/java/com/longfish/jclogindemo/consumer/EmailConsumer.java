@@ -25,7 +25,7 @@ public class EmailConsumer {
     public void process(byte[] data) {
         EmailDTO emailDTO = JSON.parseObject(new String(data), EmailDTO.class);
         emailUtil.sendHtmlMail(emailDTO);
-        codeRedisUtil.insert(emailDTO.getEmail(), (String) emailDTO.getCommentMap().get("content"));
+        codeRedisUtil.insert(emailDTO.getEmail(), String.valueOf(emailDTO.getCommentMap().get("content")));
     }
 
 }
