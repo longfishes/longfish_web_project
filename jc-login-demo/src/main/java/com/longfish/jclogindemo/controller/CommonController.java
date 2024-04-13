@@ -57,9 +57,4 @@ public class CommonController {
 
         return Result.success();
     }
-
-    @GetMapping("/test")
-    public String test() {
-        return "OK";
-    }
 }

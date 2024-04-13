@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class Knife4jConfig {
 
     @Bean
-    public OpenAPI springShopOpenApi() {
+    public OpenAPI springOpenApi() {
         Contact contact = new Contact()
                 .name("longfish")
                 .email("longfishes@qq.com");
