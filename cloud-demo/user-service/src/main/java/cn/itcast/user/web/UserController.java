@@ -20,7 +20,6 @@ public class UserController {
     private UserService userService;
 
     @Value("yyyy")
-//    @NacosValue("${pattern:dateformat}")
     private String dateformat;
 
     /**

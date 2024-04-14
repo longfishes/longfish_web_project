@@ -46,6 +46,9 @@ public class UserAuthServiceImpl implements UserAuthService {
     @Override
     public UserLoginVO login(UserLoginDTO userLoginDTO) {
         log.info("用户 {} 登录 @ {}", userLoginDTO, LocalDateTime.now());
+        if (userLoginDTO.getUsername() == null) {
+            throw new BizException(StatusCodeEnum.USER_IS_NULL);
+        }
         UserAuth userAuth = UserAuth.builder()
                 .username(userLoginDTO.getUsername())
                 .build();

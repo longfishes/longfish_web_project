@@ -23,13 +23,17 @@ public enum StatusCodeEnum {
 
     USER_NOT_EXIST(40002, "用户不存在"),
 
-    AUTHORIZED(40300, "没有操作权限"),
+    AUTHORIZED(40100, "未认证"),
+
+    FORBIDDEN(40300, "没有操作权限"),
 
     METHOD_NOT_ALLOWED(40500, "请求方法不允许"),
 
     SYSTEM_ERROR(50000, "系统异常"),
 
-    VALID_ERROR(52000, "参数格式不正确");
+    VALID_ERROR(52000, "参数格式不正确"),
+
+    USER_IS_NULL(40002, "用户名为空");
 
     private final Integer code;
 

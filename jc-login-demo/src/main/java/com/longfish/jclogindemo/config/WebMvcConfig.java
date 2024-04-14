@@ -22,7 +22,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         registry.addInterceptor(jwtTokenUserInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/userAuth/**")
-                .excludePathPatterns("/common/code");
+                .excludePathPatterns("/common/code")
+                .excludePathPatterns("/")
+                .excludePathPatterns("/favicon.ico");
     }
 
     @Override
