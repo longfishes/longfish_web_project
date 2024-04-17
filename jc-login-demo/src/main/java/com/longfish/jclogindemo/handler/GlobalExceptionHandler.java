@@ -6,6 +6,7 @@ import com.longfish.jclogindemo.pojo.Result;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -38,6 +39,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public Result formatExceptionHandler(HttpMessageNotReadableException ex) {
+        log.error("参数格式错误, {}", ex.getMessage());
+        return Result.error(StatusCodeEnum.VALID_ERROR);
+    }
+
+    @ExceptionHandler
+    public Result formatExceptionHandler(HttpMediaTypeNotSupportedException ex) {
         log.error("参数格式错误, {}", ex.getMessage());
         return Result.error(StatusCodeEnum.VALID_ERROR);
     }

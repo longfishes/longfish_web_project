@@ -5,18 +5,20 @@ import com.longfish.jclogindemo.constant.RabbitMQConstant;
 import com.longfish.jclogindemo.enums.StatusCodeEnum;
 import com.longfish.jclogindemo.exception.BizException;
 import com.longfish.jclogindemo.pojo.Result;
+import com.longfish.jclogindemo.pojo.dto.CodeDTO;
 import com.longfish.jclogindemo.pojo.dto.EmailDTO;
 import com.longfish.jclogindemo.util.EmailUtil;
 import com.longfish.jclogindemo.util.RandomUtil;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,18 +39,15 @@ public class CommonController {
 
     @Operation(summary = "发送邮箱验证码")
     @PostMapping("/code")
-    @Parameters({
-            @Parameter(name = "username", description = "用户名", required = true)
-    })
-    public Result sendCode(String username) {
-        if (!emailUtil.check(username)) {
-            throw new BizException(StatusCodeEnum.VALID_ERROR);
+    public Result sendCode(@RequestBody CodeDTO codeDTO) {
+        if (!emailUtil.check(codeDTO.getUsername())) {
+            throw new BizException(StatusCodeEnum.EMAIL_FORMAT_ERROR);
         }
         Map<String, Object> map = new HashMap<>();
         String code = randomUtil.getRandomCode();
         map.put("content", code);
         EmailDTO emailDTO = EmailDTO.builder()
-                .email(username)
+                .email(codeDTO.getUsername())
                 .subject("验证码")
                 .template("code.html")
                 .commentMap(map)

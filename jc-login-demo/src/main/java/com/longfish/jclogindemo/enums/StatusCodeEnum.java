@@ -23,6 +23,8 @@ public enum StatusCodeEnum {
 
     USER_NOT_EXIST(40002, "用户不存在"),
 
+    EMAIL_FORMAT_ERROR(40003, "邮箱格式不正确"),
+
     AUTHORIZED(40100, "未认证"),
 
     FORBIDDEN(40300, "没有操作权限"),
