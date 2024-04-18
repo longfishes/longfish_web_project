@@ -76,10 +76,10 @@ public class UserAuthServiceImpl implements UserAuthService {
         if (users != null && users.size() != 0) {
             throw new BizException(StatusCodeEnum.USER_EXIST);
         }
-        String code = codeRedisUtil.get(userRegDTO.getUsername());
-        if (code == null || !code.equals(userRegDTO.getCode())){
-            throw new BizException(StatusCodeEnum.CODE_ERROR);
-        }
+//        String code = codeRedisUtil.get(userRegDTO.getUsername());
+//        if (code == null || !code.equals(userRegDTO.getCode())){
+//            throw new BizException(StatusCodeEnum.CODE_ERROR);
+//        }
         UserAuth userAuth = new UserAuth();
         BeanUtils.copyProperties(userRegDTO, userAuth);
         userAuth.setPassword(DigestUtils.md5DigestAsHex(userRegDTO.getPassword().getBytes()));
