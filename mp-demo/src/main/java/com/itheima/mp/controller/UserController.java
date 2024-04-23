@@ -25,28 +25,26 @@ public class UserController {
 
     @ApiOperation("新增用户接口")
     @PostMapping
-    public void saveUser(@RequestBody UserFormDTO userDTO){
-        // 1.把DTO拷贝到PO
+    public void saveUser(@RequestBody UserFormDTO userDTO) {
         User user = BeanUtil.copyProperties(userDTO, User.class);
-        // 2.新增
         userService.save(user);
     }
 
     @ApiOperation("删除用户接口")
     @DeleteMapping("{id}")
-    public void deleteUserById(@ApiParam("用户id") @PathVariable("id") Long id){
+    public void deleteUserById(@ApiParam("用户id") @PathVariable("id") Long id) {
         userService.removeById(id);
     }
 
     @ApiOperation("根据id查询用户接口")
     @GetMapping("{id}")
-    public UserVO queryUserById(@ApiParam("用户id") @PathVariable("id") Long id){
+    public UserVO queryUserById(@ApiParam("用户id") @PathVariable("id") Long id) {
         return userService.queryUserAndAddressById(id);
     }
 
     @ApiOperation("根据id批量查询用户接口")
     @GetMapping
-    public List<UserVO> queryUserByIds(@ApiParam("用户id集合") @RequestParam("ids") List<Long> ids){
+    public List<UserVO> queryUserByIds(@ApiParam("用户id集合") @RequestParam("ids") List<Long> ids) {
         return userService.queryUserAndAddressByIds(ids);
     }
 
@@ -54,23 +52,21 @@ public class UserController {
     @PutMapping("/{id}/deduction/{money}")
     public void deductBalance(
             @ApiParam("用户id") @PathVariable("id") Long id,
-            @ApiParam("扣减的金额") @PathVariable("money") Integer money){
+            @ApiParam("扣减的金额") @PathVariable("money") Integer money) {
         userService.deductBalance(id, money);
     }
 
     @ApiOperation("根据复杂条件查询用户接口")
     @GetMapping("/list")
-    public List<UserVO> queryUsers(UserQuery query){
-        // 1.查询用户PO
+    public List<UserVO> queryUsers(UserQuery query) {
         List<User> users = userService.queryUsers(
                 query.getName(), query.getStatus(), query.getMinBalance(), query.getMaxBalance());
-        // 2.把PO拷贝到VO
         return BeanUtil.copyToList(users, UserVO.class);
     }
 
     @ApiOperation("根据条件分页查询用户接口")
     @GetMapping("/page")
-    public PageDTO<UserVO> queryUsersPage(UserQuery query){
-       return userService.queryUsersPage(query);
+    public PageDTO<UserVO> queryUsersPage(UserQuery query) {
+        return userService.queryUsersPage(query);
     }
 }

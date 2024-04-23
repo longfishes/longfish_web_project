@@ -1,6 +1,6 @@
-package com.itheima.mp.service;
+package com.longfish.mp.service;
 
-import com.itheima.mp.domain.po.Address;
+import com.longfish.mp.pojo.Address;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

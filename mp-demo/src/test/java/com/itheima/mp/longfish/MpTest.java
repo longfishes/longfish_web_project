@@ -42,22 +42,15 @@ public class MpTest {
     @Test
     public void testQueryWrapperUpdate() {
         userMapper.update(
-                User.builder()
-                        .balance(2000)
-                        .build(),
-                new QueryWrapper<User>()
-                        .eq("username", "jack")
-        );
+                User.builder().balance(2000).build(), new QueryWrapper<User>().eq("username", "jack"));
     }
 
     @Test
     public void testUpdateWrapper() {
-        userMapper.update(
-                null,
+        userMapper.update(null,
                 new UpdateWrapper<User>()
                         .setSql("balance = balance - 200")
-                        .in("id", Arrays.asList(1L, 2L, 4L))
-        );
+                        .in("id", Arrays.asList(1L, 2L, 4L)));
     }
 
     private void listAll() {

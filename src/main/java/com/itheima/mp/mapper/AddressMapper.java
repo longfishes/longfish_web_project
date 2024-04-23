@@ -1,7 +1,7 @@
 package com.itheima.mp.mapper;
 
+import com.itheima.mp.po.Address;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.itheima.mp.domain.po.Address;
 
 /**
  * <p>

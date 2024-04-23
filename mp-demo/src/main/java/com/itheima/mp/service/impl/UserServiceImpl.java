@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+
     @Override
     @Transactional
     public void deductBalance(Long id, Integer money) {

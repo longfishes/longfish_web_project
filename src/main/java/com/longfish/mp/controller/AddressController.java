@@ -1,4 +1,4 @@
-package com.itheima.mp.controller;
+package com.longfish.mp.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;

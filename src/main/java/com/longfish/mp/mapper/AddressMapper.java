@@ -1,7 +1,7 @@
-package com.itheima.mp.mapper;
+package com.longfish.mp.mapper;
 
+import com.longfish.mp.pojo.Address;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.itheima.mp.domain.po.Address;
 
 /**
  * <p>
