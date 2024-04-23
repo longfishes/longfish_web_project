@@ -1,7 +1,10 @@
 package com.longfish.mapper;
 
 import com.longfish.pojo.Emp;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,13 +14,13 @@ public interface EmpMapper {
 
     /**
      *
-     * @Description 删除id为?的员工
+     * 删除id为?的员工
      */
     int delete(Integer ... ids);
 
     /**
      *
-     * @Description 插入数据，已设置主键返回
+     * 插入数据，已设置主键返回
      */
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time) " +
@@ -26,14 +29,14 @@ public interface EmpMapper {
 
     /**
      *
-     * @Description 更新数据
+     * 更新数据
      */
     int update(Emp emp);
 
 
     /**
      *
-     * @Description 根据id查询
+     * 根据id查询
      */
 //    @Results({
 //            @Result(column = "dept_id", property = "deptId"),

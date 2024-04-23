@@ -11,6 +11,7 @@
         <module name="cert-update-script" />
         <module name="springboot-mybatis-crud" />
         <module name="rabbitmq-demo" />
+        <module name="mp-demo" />
         <module name="ddns-config" />
         <module name="minecraft-plugin-start" />
         <module name="ddns" />
@@ -39,6 +40,7 @@
       <module name="maven-project01" target="17" />
       <module name="maven-project02" target="11" />
       <module name="minecraft-plugin-start" target="1.8" />
+      <module name="mp-demo" target="11" />
       <module name="mybatis-project-quickstart" target="17" />
       <module name="order-service" target="1.8" />
       <module name="rabbitmq-demo" target="17" />
@@ -58,6 +60,7 @@
       <module name="deno" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="jc-login-demo" options="-parameters" />
+      <module name="mp-demo" options="-parameters" />
       <module name="mybatis-project-quickstart" options="-parameters" />
       <module name="order-service" options="-parameters" />
       <module name="rabbitmq-demo" options="-parameters" />

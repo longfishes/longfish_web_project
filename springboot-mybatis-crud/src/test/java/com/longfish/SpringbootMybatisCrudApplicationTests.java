@@ -58,7 +58,6 @@ class SpringbootMybatisCrudApplicationTests {
 
     @Test
     public void testList(){
-//        empMapper.list("张", null, null, null).forEach(System.out::println);
         empMapper.list(null, 2, null, null).forEach(System.out::println);
     }
 

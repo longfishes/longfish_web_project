@@ -59,7 +59,7 @@ class JcLoginDemoApplicationTests {
     public void testMQ() {
         String username = "longfishes@qq.com";
         Map<String, Object> map = new HashMap<>();
-        map.put("content", "测试2");
+        map.put("content", "001111");
         EmailDTO emailDTO = EmailDTO.builder()
                 .email(username)
                 .subject("消息队列测试")
@@ -85,4 +85,10 @@ class JcLoginDemoApplicationTests {
         emailUtil.sendHtmlMail(emailDTO);
     }
 
+    @Test
+    public void test2() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println(randomUtil.getRandomCode());
+        }
+    }
 }

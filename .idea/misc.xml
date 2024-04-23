@@ -36,6 +36,7 @@
         <option value="$PROJECT_DIR$/rabbitmq-demo/pom.xml" />
         <option value="$PROJECT_DIR$/jc-login-demo/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/mp-demo/pom.xml" />
       </list>
     </option>
   </component>

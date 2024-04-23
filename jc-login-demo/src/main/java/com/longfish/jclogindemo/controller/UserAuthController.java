@@ -27,9 +27,25 @@ public class UserAuthController {
         return Result.success(userLoginVO);
     }
 
+    @Operation(summary = "用户登录form")
+    @PostMapping("/login/form")
+    public Result<UserLoginVO> login(String username, String password) {
+        UserLoginDTO userLoginDTO = UserLoginDTO.builder().username(username).password(password).build();
+        UserLoginVO userLoginVO = userAuthService.login(userLoginDTO);
+        return Result.success(userLoginVO);
+    }
+
     @Operation(summary = "用户注册")
     @PostMapping("/register")
     public Result register(@RequestBody UserRegDTO userRegDTO) {
+        userAuthService.register(userRegDTO);
+        return Result.success();
+    }
+
+    @Operation(summary = "用户注册form")
+    @PostMapping("/register/form")
+    public Result register(String username, String password, String code) {
+        UserRegDTO userRegDTO = UserRegDTO.builder().username(username).password(password).code(code).build();
         userAuthService.register(userRegDTO);
         return Result.success();
     }
