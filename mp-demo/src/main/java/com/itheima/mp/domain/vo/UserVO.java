@@ -4,11 +4,13 @@ import com.itheima.mp.domain.po.UserInfo;
 import com.itheima.mp.enums.UserStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@Builder
 @ApiModel(description = "用户VO实体")
 public class UserVO {
 

@@ -4,30 +4,36 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.itheima.mp.enums.UserStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "user", autoResultMap = true)
 public class User {
 
     /**
      * 用户id
      */
-    // @TableId(type = IdType.AUTO)
+//     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
      * 用户名
      */
-    // @TableField("`username`")
+//     @TableField("`username`")
     private String username;
 
     /**
      * 密码
      */
-    // @TableField(exist = false)
+//     @TableField(exist = false)
     private String password;
 
     /**

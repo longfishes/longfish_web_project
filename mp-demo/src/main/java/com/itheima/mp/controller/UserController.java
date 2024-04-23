@@ -10,7 +10,7 @@ import com.itheima.mp.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,10 +18,10 @@ import java.util.List;
 @Api(tags = "用户管理接口")
 @RequestMapping("/users")
 @RestController
-@RequiredArgsConstructor
 public class UserController {
 
-    private final IUserService userService;
+    @Autowired
+    private IUserService userService;
 
     @ApiOperation("新增用户接口")
     @PostMapping
