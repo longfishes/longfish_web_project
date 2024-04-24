@@ -10,12 +10,16 @@ import lombok.Data;
 @Data
 @ApiModel(description = "分页查询实体")
 public class PageQuery {
+
     @ApiModelProperty("页码")
     private Integer pageNo = 1;
+
     @ApiModelProperty("页码")
     private Integer pageSize = 5;
+
     @ApiModelProperty("排序字段")
     private String sortBy;
+
     @ApiModelProperty("是否升序")
     private Boolean isAsc = true;
 

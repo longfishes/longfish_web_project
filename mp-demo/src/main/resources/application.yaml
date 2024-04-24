@@ -1,5 +1,5 @@
 server:
-  port: 7090
+  port: 7190
 
 spring:
   datasource:
@@ -7,11 +7,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
+
 logging:
   level:
     com.itheima: debug
   pattern:
     dateformat: HH:mm:ss
+
 mybatis-plus:
   type-aliases-package: com.itheima.mp.domain.po
   global-config:
@@ -20,11 +22,15 @@ mybatis-plus:
       logic-delete-field: deleted # 配置逻辑删除字段
   configuration:
     default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
+
+page:
+  max: 1000
+
 knife4j:
   enable: true
   openapi:
-    title: 用户管理接口文档
-    description: "用户管理接口文档"
+    title: MybatisPlus 用户管理接口文档
+    description: "用户管理接口文档 MP"
     email: zhanghuyi@itcast.cn
     concat: 虎哥
     url: https://www.itcast.cn

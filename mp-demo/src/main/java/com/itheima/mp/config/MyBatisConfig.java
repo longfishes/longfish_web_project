@@ -3,19 +3,21 @@ package com.itheima.mp.config;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MyBatisConfig {
 
+    @Value("${page.max}")
+    private Long limit;
+
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor(){
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-        // 1.创建分页插件
         PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor(DbType.MYSQL);
-        paginationInnerInterceptor.setMaxLimit(1000L);
-        // 2.添加分页插件
+        paginationInnerInterceptor.setMaxLimit(limit);
         interceptor.addInnerInterceptor(paginationInnerInterceptor);
         return interceptor;
     }

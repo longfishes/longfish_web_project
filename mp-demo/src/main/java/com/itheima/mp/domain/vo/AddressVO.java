@@ -2,17 +2,19 @@ package com.itheima.mp.domain.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Data;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 虎哥
  * @since 2023-07-01
  */
 @Data
+@Builder
 @ApiModel(description = "收货地址VO")
 public class AddressVO{
 
