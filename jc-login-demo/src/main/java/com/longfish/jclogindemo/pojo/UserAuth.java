@@ -17,8 +17,6 @@ public class UserAuth {
 
     private String password;
 
-    private String code;
-
     private String createTime;
 
     private String updateTime;

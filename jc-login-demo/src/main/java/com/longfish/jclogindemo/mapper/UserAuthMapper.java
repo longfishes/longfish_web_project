@@ -1,16 +1,10 @@
 package com.longfish.jclogindemo.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.longfish.jclogindemo.pojo.UserAuth;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
-
 @Mapper
-public interface UserAuthMapper {
+public interface UserAuthMapper extends BaseMapper<UserAuth> {
 
-    void insert(UserAuth userAuth);
-
-    List<UserAuth> select(UserAuth userAuth);
-
-    void updateById(UserAuth auth);
 }

@@ -1,5 +1,6 @@
 package com.longfish.jclogindemo.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.longfish.jclogindemo.enums.StatusCodeEnum;
 import com.longfish.jclogindemo.exception.BizException;
 import com.longfish.jclogindemo.mapper.UserAuthMapper;
@@ -29,10 +30,7 @@ import static com.longfish.jclogindemo.constant.CommonConstant.USER_ID;
 
 @Service
 @Slf4j
-public class UserAuthServiceImpl implements UserAuthService {
-
-    @Autowired
-    private UserAuthMapper userAuthMapper;
+public class UserAuthServiceImpl extends ServiceImpl<UserAuthMapper, UserAuth> implements UserAuthService {
 
     @Autowired
     private CodeRedisUtil codeRedisUtil;
@@ -52,7 +50,7 @@ public class UserAuthServiceImpl implements UserAuthService {
         UserAuth userAuth = UserAuth.builder()
                 .username(userLoginDTO.getUsername())
                 .build();
-        List<UserAuth> userAuthList = userAuthMapper.select(userAuth);
+        List<UserAuth> userAuthList = lambdaQuery(userAuth).list();
         if (userAuthList.size() != 1) {
             throw new BizException(StatusCodeEnum.USER_NOT_EXIST);
         }
@@ -72,7 +70,7 @@ public class UserAuthServiceImpl implements UserAuthService {
 
     @Override
     public void register(UserRegDTO userRegDTO) {
-        List<UserAuth> users = userAuthMapper.select(UserAuth.builder().username(userRegDTO.getUsername()).build());
+        List<UserAuth> users = lambdaQuery(UserAuth.builder().username(userRegDTO.getUsername()).build()).list();
         if (users != null && users.size() != 0) {
             throw new BizException(StatusCodeEnum.USER_EXIST);
         }
@@ -85,12 +83,12 @@ public class UserAuthServiceImpl implements UserAuthService {
         userAuth.setPassword(DigestUtils.md5DigestAsHex(userRegDTO.getPassword().getBytes()));
         userAuth.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)));
         userAuth.setUpdateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)));
-        userAuthMapper.insert(userAuth);
+        save(userAuth);
     }
 
     @Override
     public void forgot(PasswordDTO passwordDTO) {
-        List<UserAuth> users = userAuthMapper.select(UserAuth.builder().username(passwordDTO.getUsername()).build());
+        List<UserAuth> users = lambdaQuery(UserAuth.builder().username(passwordDTO.getUsername()).build()).list();
         if (users == null || users.size() == 0) {
             throw new BizException(StatusCodeEnum.USER_NOT_EXIST);
         }
@@ -104,15 +102,15 @@ public class UserAuthServiceImpl implements UserAuthService {
                 .password(DigestUtils.md5DigestAsHex(passwordDTO.getNewPassword().getBytes()))
                 .updateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)))
                 .build();
-        userAuthMapper.updateById(auth);
+        updateById(auth);
     }
 
     @Override
     public void password(PasswordDTO passwordDTO) {
-        List<UserAuth> userAuthList = userAuthMapper.select(UserAuth
+        List<UserAuth> userAuthList = lambdaQuery(UserAuth
                 .builder()
                 .username(passwordDTO.getUsername())
-                .build());
+                .build()).list();
         if (userAuthList == null || userAuthList.size() == 0) {
             throw new BizException(StatusCodeEnum.USER_NOT_EXIST);
         }
@@ -125,6 +123,6 @@ public class UserAuthServiceImpl implements UserAuthService {
                 .password(DigestUtils.md5DigestAsHex(passwordDTO.getNewPassword().getBytes()))
                 .updateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)))
                 .build();
-        userAuthMapper.updateById(auth);
+        updateById(auth);
     }
 }
