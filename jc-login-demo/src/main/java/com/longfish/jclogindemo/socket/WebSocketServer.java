@@ -1,9 +1,6 @@
 package com.longfish.jclogindemo.socket;
 
-import jakarta.websocket.OnClose;
-import jakarta.websocket.OnMessage;
-import jakarta.websocket.OnOpen;
-import jakarta.websocket.Session;
+import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import lombok.extern.slf4j.Slf4j;
@@ -19,41 +16,81 @@ import java.util.Map;
 @ServerEndpoint("/ws/{sid}")
 public class WebSocketServer {
 
+    private static final Map<String, Integer> cache = new HashMap<>();
+
     private static final Map<String, Session> sessionMap = new HashMap<>();
 
-    /**
-     * 连接建立成功调用的方法
-     */
+    private static final String create = "create";
+
     @OnOpen
     public void onOpen(Session session, @PathParam("sid") String sid) throws IOException {
-        log.info("客户端 {} 建立连接", sid);
         if (sessionMap.containsKey(sid)) {
             session.getBasicRemote().sendText("sid 已在线！");
             session.close();
+            return;
         }
+
+        if (cache.containsKey(create)) {
+            cache.put(create, cache.get(create) + 1);
+        } else {
+            cache.put(create, 1);
+        }
+
+        if (cache.get(create) > 5) {
+            return;
+        }
+
+        log.info("客户端 {} 建立连接", sid);
         sessionMap.put(sid, session);
+        boardCastNoticeSingle(session);
+        sendToOtherClient(session, sid + " 上线了！ 当前在线人数：" + sessionMap.size());
     }
 
-    /**
-     * 收到客户端消息后调用的方法
-     *
-     * @param message 客户端发送过来的消息
-     */
     @OnMessage
-    public void onMessage(String message, @PathParam("sid") String sid) {
+    public void onMessage(String message, @PathParam("sid") String sid) throws IOException {
+        if (message == null || message.equals("")) {
+            sessionMap.get(sid).getBasicRemote().sendText("不许发送空白消息！");
+            return;
+        }
+
+        if (cache.containsKey(sid)) {
+            cache.put(sid, cache.get(sid) + 1);
+        } else {
+            cache.put(sid, 1);
+        }
+
+        if (cache.get(sid) > 5) {
+            sessionMap.get(sid).getBasicRemote().sendText("你发送的太快了！");
+            return;
+        }
+
         log.info("收到来自客户端 {} 的信息 : {}", sid, message);
         sendToOtherClient(sessionMap.get(sid), sid + " 说 : " + message);
     }
 
-    /**
-     * 连接关闭调用的方法
-     *
-     * @param sid sid
-     */
     @OnClose
     public void onClose(@PathParam("sid") String sid) {
         log.info("{} 离线", sid);
         sessionMap.remove(sid);
+    }
+
+    @OnError
+    public void onError(Throwable e) {
+        log.info("{}", e.getMessage());
+    }
+
+    public void cleanCache() {
+        cache.clear();
+    }
+
+    public void boardCastNoticeSingle(Session session) throws IOException {
+        int cnt = sessionMap.size();
+        session.getBasicRemote().sendText("欢迎光临longfish的无聊 websocket 在线聊天室 当前在线人数：" + cnt);
+    }
+
+    public void boardCastNoticeToAll() {
+        int cnt = sessionMap.size();
+        sendToAllClient("欢迎光临longfish的无聊 websocket 在线聊天室 当前在线人数：" + cnt);
     }
 
     public void sendToAllClient(String message) {
