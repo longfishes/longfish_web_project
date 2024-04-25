@@ -55,6 +55,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:6.0.15" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:6.0.15" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:6.0.15" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-configuration-processor:3.1.7" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.mysql:mysql-connector-j:8.0.33" level="project" />
     <orderEntry type="library" name="Maven: com.baomidou:mybatis-plus-boot-starter:3.5.5" level="project" />
     <orderEntry type="library" name="Maven: com.baomidou:mybatis-plus:3.5.5" level="project" />
@@ -87,6 +88,7 @@
     <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.5.13" level="project" />
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.30" level="project" />
+    <orderEntry type="library" name="Maven: cn.hutool:hutool-all:5.8.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:3.1.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:3.1.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:3.1.7" level="project" />

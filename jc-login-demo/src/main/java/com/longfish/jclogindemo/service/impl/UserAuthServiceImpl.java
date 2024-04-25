@@ -1,5 +1,6 @@
 package com.longfish.jclogindemo.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.longfish.jclogindemo.enums.StatusCodeEnum;
 import com.longfish.jclogindemo.exception.BizException;
@@ -9,13 +10,12 @@ import com.longfish.jclogindemo.pojo.dto.PasswordDTO;
 import com.longfish.jclogindemo.pojo.dto.UserLoginDTO;
 import com.longfish.jclogindemo.pojo.dto.UserRegDTO;
 import com.longfish.jclogindemo.pojo.vo.UserLoginVO;
+import com.longfish.jclogindemo.properties.JwtProperties;
 import com.longfish.jclogindemo.service.UserAuthService;
 import com.longfish.jclogindemo.util.CodeRedisUtil;
 import com.longfish.jclogindemo.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -35,11 +35,8 @@ public class UserAuthServiceImpl extends ServiceImpl<UserAuthMapper, UserAuth> i
     @Autowired
     private CodeRedisUtil codeRedisUtil;
 
-    @Value("${jwt.secret-key}")
-    private String secretKey;
-
-    @Value("${jwt.ttl}")
-    private Long ttl;
+    @Autowired
+    private JwtProperties jwtProperties;
 
     @Override
     public UserLoginVO login(UserLoginDTO userLoginDTO) {
@@ -60,8 +57,8 @@ public class UserAuthServiceImpl extends ServiceImpl<UserAuthMapper, UserAuth> i
         Map<String, Object> claims = new HashMap<>();
         claims.put(USER_ID, userAuthList.get(0).getId());
         String token = JwtUtil.createJWT(
-                secretKey,
-                ttl,
+                jwtProperties.getSecretKey(),
+                jwtProperties.getTtl(),
                 claims);
         return UserLoginVO.builder()
                 .jwt(token)
@@ -78,8 +75,8 @@ public class UserAuthServiceImpl extends ServiceImpl<UserAuthMapper, UserAuth> i
 //        if (code == null || !code.equals(userRegDTO.getCode())){
 //            throw new BizException(StatusCodeEnum.CODE_ERROR);
 //        }
-        UserAuth userAuth = new UserAuth();
-        BeanUtils.copyProperties(userRegDTO, userAuth);
+
+        UserAuth userAuth = BeanUtil.copyProperties(userRegDTO, UserAuth.class);
         userAuth.setPassword(DigestUtils.md5DigestAsHex(userRegDTO.getPassword().getBytes()));
         userAuth.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)));
         userAuth.setUpdateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern(PATTERN)));

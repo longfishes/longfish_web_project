@@ -1,10 +1,10 @@
 package com.longfish.jclogindemo;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.longfish.jclogindemo.mapper.UserAuthMapper;
 import com.longfish.jclogindemo.pojo.UserAuth;
 import com.longfish.jclogindemo.pojo.dto.UserRegDTO;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -25,8 +25,7 @@ public class MybatisTest {
                 .createTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .updateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .build();
-        UserAuth userAuth = new UserAuth();
-        BeanUtils.copyProperties(userRegDTO, userAuth);
+        UserAuth userAuth = BeanUtil.copyProperties(userRegDTO, UserAuth.class);
         userAuthMapper.insert(userAuth);
     }
 }
