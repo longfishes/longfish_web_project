@@ -24,4 +24,9 @@ public class LocalTest {
 
         System.out.println(isValid);
     }
+
+    @Test
+    public void testCase() {
+
+    }
 }

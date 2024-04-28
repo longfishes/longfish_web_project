@@ -12,7 +12,7 @@
     <artifactId>mp-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mp-demo</name>
-    <description>mp-demo</description>
+    <description>mp-demo-app</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -24,6 +24,7 @@
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
+            <version>8.1.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
