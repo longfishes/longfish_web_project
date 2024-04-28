@@ -1,5 +1,7 @@
 package com.longfish.jclogindemo.socket;
 
+import cn.hutool.core.util.StrUtil;
+import com.longfish.jclogindemo.config.WebSocketConfig;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
@@ -13,34 +15,30 @@ import java.util.Map;
 
 @Slf4j
 @Component
-@ServerEndpoint("/ws/{sid}")
+@ServerEndpoint(value = "/ws/{sid}", configurator = WebSocketConfig.class)
 public class WebSocketServer {
 
     private static final Map<String, Integer> cache = new HashMap<>();
 
     private static final Map<String, Session> sessionMap = new HashMap<>();
 
-    private static final String create = "create";
-
     @OnOpen
     public void onOpen(Session session, @PathParam("sid") String sid) throws IOException {
         if (sessionMap.containsKey(sid)) {
-            session.getBasicRemote().sendText("sid 已在线！");
+            session.getBasicRemote().sendText(sid + " 已在线！");
             session.close();
             return;
         }
 
-        if (cache.containsKey(create)) {
-            cache.put(create, cache.get(create) + 1);
-        } else {
-            cache.put(create, 1);
-        }
-
-        if (cache.get(create) > 5) {
+        if (sessionMap.size() > 20) {
+            session.getBasicRemote().sendText("服务器人太多了，等等再来吧！");
+            session.close();
             return;
         }
 
-        log.info("客户端 {} 建立连接", sid);
+        String remoteIp = getHeader(session, "x-forwarded-for");
+
+        log.info("{} 客户端 {} 建立连接", remoteIp, sid);
         sessionMap.put(sid, session);
         boardCastNoticeSingle(session);
         sendToOtherClient(session, sid + " 上线了！ 当前在线人数：" + sessionMap.size());
@@ -53,18 +51,20 @@ public class WebSocketServer {
             return;
         }
 
-        if (cache.containsKey(sid)) {
-            cache.put(sid, cache.get(sid) + 1);
+        String remoteIp = getHeader(sessionMap.get(sid), "x-forwarded-for");
+
+        if (cache.containsKey(remoteIp)) {
+            cache.put(remoteIp, cache.get(remoteIp) + 1);
         } else {
-            cache.put(sid, 1);
+            cache.put(remoteIp, 1);
         }
 
-        if (cache.get(sid) > 5) {
+        if (cache.get(remoteIp) > 5) {
             sessionMap.get(sid).getBasicRemote().sendText("你发送的太快了！");
             return;
         }
 
-        log.info("收到来自客户端 {} 的信息 : {}", sid, message);
+        log.info("{} 客户端 {} 的信息 : {}", remoteIp, sid, message);
         sendToOtherClient(sessionMap.get(sid), sid + " 说 : " + message);
     }
 
@@ -81,6 +81,15 @@ public class WebSocketServer {
 
     public void cleanCache() {
         cache.clear();
+    }
+
+    public static String getHeader(Session session, String headerName) throws IOException {
+        final String header = (String) session.getUserProperties().get(headerName);
+        if (StrUtil.isBlank(header)) {
+            log.error("获取header失败，不安全的连接，即将关闭");
+            session.close();
+        }
+        return header;
     }
 
     public void boardCastNoticeSingle(Session session) throws IOException {

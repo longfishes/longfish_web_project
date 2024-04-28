@@ -4,11 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.longfish.jclogindemo.pojo.dto.EmailDTO;
 import com.longfish.jclogindemo.util.CodeRedisUtil;
 import com.longfish.jclogindemo.util.EmailUtil;
-import com.longfish.jclogindemo.constant.RabbitMQConstant;
 import com.longfish.jclogindemo.util.RandomUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +14,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.longfish.jclogindemo.constant.RabbitMQConstant.LOGIN_EMAIL_EXCHANGE;
 
 @SpringBootTest
 class JcLoginDemoApplicationTests {
@@ -67,7 +67,7 @@ class JcLoginDemoApplicationTests {
                 .commentMap(map)
                 .build();
         System.out.println(emailDTO);
-        rabbitTemplate.convertAndSend(RabbitMQConstant.EMAIL_EXCHANGE, "*", new Message(JSON.toJSONBytes(emailDTO), new MessageProperties()));
+        rabbitTemplate.convertAndSend(LOGIN_EMAIL_EXCHANGE, "*", new Message(JSON.toJSONBytes(emailDTO)));
     }
 
     @Test

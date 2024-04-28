@@ -23,6 +23,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/userAuth/**")
                 .excludePathPatterns("/common/code")
+                .excludePathPatterns("/ws/**")
                 .excludePathPatterns("/")
                 .excludePathPatterns("/favicon.ico");
     }
