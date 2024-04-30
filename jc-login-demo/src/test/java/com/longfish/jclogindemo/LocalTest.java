@@ -26,7 +26,27 @@ public class LocalTest {
     }
 
     @Test
-    public void testCase() {
+    public void testMdToTxt() {
+        String input = """
+                国内的网民经常苦于无法访问境外网站如Youtube、Google、Twitter等。VPN(Virtual Private Network)属于典型的**正向代理**。
 
+                ![vpn](https://static.longfish.site/passage/img/vpn.jpg)
+
+                **为什么无法访问？**""";
+
+        input = input.replaceAll("<[^>]*>", "");
+        input = input.replaceAll("\n", "");
+        input = input.replaceAll("#", "");
+        input = input.replaceAll("`", "");
+        input = input.replaceAll("~", "");
+        input = input.replaceAll("\\*", "");
+        input = input.replaceAll("-", "");
+        input = input.replaceAll("\\s+", " ");
+        input = input.replaceAll("!\\[(.*?)]\\([^)]*\\)", "$1");
+        input = input.replaceAll("\\[(.*?)]\\([^)]*\\)", "$1");
+        input = input.replaceAll("\\[", "");
+        input = input.replaceAll(">", "");
+
+        System.out.println(input);
     }
 }
