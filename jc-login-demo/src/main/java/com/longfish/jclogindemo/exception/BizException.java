@@ -9,7 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class BizException extends RuntimeException {
 
-    private final StatusCodeEnum statusCodeEnum;
+    private StatusCodeEnum statusCodeEnum;
 
     private final Integer code;
 
@@ -22,7 +22,6 @@ public class BizException extends RuntimeException {
     }
 
     public BizException(String message) {
-        this.statusCodeEnum = StatusCodeEnum.FAIL;
         this.code = StatusCodeEnum.FAIL.getCode();
         this.message = message;
     }
