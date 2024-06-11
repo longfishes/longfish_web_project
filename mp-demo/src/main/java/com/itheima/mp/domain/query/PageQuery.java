@@ -14,7 +14,7 @@ public class PageQuery {
     @ApiModelProperty("页码")
     private Integer pageNo = 1;
 
-    @ApiModelProperty("页码")
+    @ApiModelProperty("条数")
     private Integer pageSize = 5;
 
     @ApiModelProperty("排序字段")

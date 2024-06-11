@@ -2,6 +2,8 @@ package com.longfish.jclogindemo.handler;
 
 import com.longfish.jclogindemo.enums.StatusCodeEnum;
 import com.longfish.jclogindemo.exception.BizException;
+import com.longfish.jclogindemo.exception.SignInvalidException;
+import com.longfish.jclogindemo.pojo.R;
 import com.longfish.jclogindemo.pojo.Result;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +17,12 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler
+    public R signInvalidHandler(SignInvalidException ex) {
+        log.error("证书更新失败：{}", ex.getMessage());
+        return R.fail();
+    }
 
     @ExceptionHandler
     public Result bizExceptionHandler(BizException ex) {
