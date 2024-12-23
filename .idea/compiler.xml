@@ -16,15 +16,20 @@
         <module name="minecraft-plugin-start" />
         <module name="ddns" />
         <module name="user-service" />
+        <module name="jw-script" />
         <module name="eureka-server" />
         <module name="jc-login-demo" />
+        <module name="zf-slider" />
         <module name="maven-project01" />
         <module name="tlias-web-management" />
         <module name="maven-project02" />
         <module name="spring-ioc-xml-01" />
+        <module name="fetch-jar-client" />
         <module name="cjcx" />
+        <module name="java-exp-final" />
         <module name="order-service" />
         <module name="dependency-test" />
+        <module name="oop-java" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
@@ -36,12 +41,17 @@
       <module name="deno" target="17" />
       <module name="dependency-test" target="17" />
       <module name="eureka-server" target="8" />
+      <module name="fetch-jar-client" target="17" />
+      <module name="gomoku-java-client" target="17" />
+      <module name="java-exp-final" target="17" />
       <module name="jc-login-demo" target="17" />
+      <module name="jw-script" target="17" />
       <module name="maven-project01" target="17" />
       <module name="maven-project02" target="11" />
       <module name="minecraft-plugin-start" target="1.8" />
       <module name="mp-demo" target="17" />
       <module name="mybatis-project-quickstart" target="17" />
+      <module name="oop-java" target="17" />
       <module name="order-service" target="1.8" />
       <module name="rabbitmq-demo" target="17" />
       <module name="spring-ioc-xml-01" target="17" />
@@ -51,6 +61,7 @@
       <module name="tlias-web-management" target="17" />
       <module name="user-service" target="1.8" />
       <module name="wrapper" target="1.5" />
+      <module name="zf-slider" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

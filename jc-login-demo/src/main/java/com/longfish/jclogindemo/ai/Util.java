@@ -35,7 +35,7 @@ public class Util {
 
     public static InputStream req(List<String> user, List<String> assist) {
         try {
-            String baseUrl = "http://localhost:5000/chat?";
+            String baseUrl = "http://k.longfish.site:9876/chat?";
             baseUrl += build("user", user);
             baseUrl += build("assistant", assist);
             while (baseUrl.charAt(baseUrl.length() - 1) == '&')

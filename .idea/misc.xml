@@ -37,6 +37,12 @@
         <option value="$PROJECT_DIR$/jc-login-demo/pom.xml" />
         <option value="$PROJECT_DIR$/cloud-demo/pom.xml" />
         <option value="$PROJECT_DIR$/mp-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/jw-script/pom.xml" />
+        <option value="$PROJECT_DIR$/zf-slider/pom.xml" />
+        <option value="$PROJECT_DIR$/oop-java-server/pom.xml" />
+        <option value="$PROJECT_DIR$/fetch-jar-client/pom.xml" />
+        <option value="$PROJECT_DIR$/java-exp-final/pom.xml" />
+        <option value="$PROJECT_DIR$/gomoku-java-client/pom.xml" />
       </list>
     </option>
   </component>
