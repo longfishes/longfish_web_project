@@ -1,4 +1,12 @@
 # Project exclude paths
-/target/
+target/
 *.class
 *.yml
+
+${project.build.directory}/
+.mvn/
+out/artifacts/
+
+# IntelliJ IDEA
+.idea/
+*.iml

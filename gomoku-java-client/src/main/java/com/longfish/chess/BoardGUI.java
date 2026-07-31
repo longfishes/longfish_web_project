@@ -44,12 +44,34 @@ public class BoardGUI extends JFrame {
             isRedTurn = true;
             validMoves = new boolean[BOARD_HEIGHT][BOARD_WIDTH];
             addMouseListener(new MouseAdapter() {
+                private boolean isPressPointValid;  // 按下位置是否合法
+
                 @Override
-                public void mouseClicked(MouseEvent e) {
-                    handleMouseClick(e);
+                public void mousePressed(MouseEvent e) {
+                    isPressPointValid = isPointInValidArea(e.getPoint());  // 验证按下的位置
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    Point releasePoint = e.getPoint();
+                    boolean isReleasePointValid = isPointInValidArea(releasePoint);  // 验证松开的位置
+
+                    // 仅当按下和松开的位置都合法，并且按下和松开的距离在允许范围内时触发
+                    if (isPressPointValid && isReleasePointValid) {
+                        handleMouseClick(e);
+                    }
                 }
             });
         }
+
+        private boolean isPointInValidArea(Point point) {
+            int col = (point.x - (int) ((CELL_SIZE - (CELL_SIZE * 0.9)) * 2.4)) / CELL_SIZE;
+            int row = (int) ((point.y - (CELL_SIZE - (CELL_SIZE * 0.9)) * 2) / CELL_SIZE);
+
+            // 判断点是否在棋盘范围内
+            return col >= 0 && col < BOARD_WIDTH && row >= 0 && row < BOARD_HEIGHT;
+        }
+
 
         private void loadPieceImages() {
             for (int i = 0; i < 7; i++) {
@@ -237,6 +259,6 @@ public class BoardGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        new BoardGUI(false);
+        new BoardGUI(true);
     }
 }

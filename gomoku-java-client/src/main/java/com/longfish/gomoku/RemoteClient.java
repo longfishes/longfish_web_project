@@ -27,7 +27,7 @@ public class RemoteClient extends JFrame {
     private int lastX = -1, lastY = -1; // 存储最后一个落子的位置
 
 
-    private static final String SERVER_ADDRESS = "k.longfish.site";
+    private static final String SERVER_ADDRESS = "192.168.1.124";
     private final int SERVER_PORT;
     private Socket socket;
     private DataInputStream reader;

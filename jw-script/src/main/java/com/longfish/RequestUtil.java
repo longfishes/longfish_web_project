@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class GccUtil {
+public class RequestUtil {
 
     private static final OkHttpClient client = new OkHttpClient()
             .newBuilder()
@@ -22,21 +22,28 @@ public class GccUtil {
 
     private static final String UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0";
 
-    private static final String prefix = "http://jwxt.gcc.edu.cn";
+//    private static final String prefix = "http://jwxt.gcc.edu.cn";
 
-//    private static final String prefix = "https://jw.gdou.edu.cn";
+    private static final String prefix = "https://jw.gdou.edu.cn";
 
     public static void getCookie() {
 
-        Scanner sc = new Scanner(System.in);
-        System.out.print("请输入jsessionid：");
-        String jsessionid = sc.next();
-        System.out.print("请输入route：");
-        String route = sc.next();
+//        Scanner sc = new Scanner(System.in);
+//        System.out.print("请输入jsessionid：");
+//        String jsessionid = sc.next();
+//        System.out.print("请输入route：");
+//        String route = sc.next();
+
+        String jsessionid = "A5E25635B767C04EEC5CAE145D57229C";
+        String adcCookie = "FFIJCGNCFAAA";
+
+//        GlobalVariableList.variables.put("cookie",
+//                "JSESSIONID=" + jsessionid
+//                        + ";route=" + route);
 
         GlobalVariableList.variables.put("cookie",
                 "JSESSIONID=" + jsessionid
-                        + ";route=" + route);
+                        + ";ADCCookie-47873-sg_210.38.137.108=" + adcCookie);
     }
 
     public static List<String> getDetail(String kchId, String kklxdm, String xkkzId) {
@@ -49,13 +56,21 @@ public class GccUtil {
         RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder()
                 .url(prefix + "/xsxk/zzxkyzbjk_cxJxbWithKchZzxkYzb.html?" +
-                        "kch_id=" + kchId + "&" +
                         "xqh_id=1&" +
+                        "jg_id=32&" +
+                        "zyfx_id=F8017AAFE52D62CDE053778926D23620&" +
                         "njdm_id=2023&" +
-                        "sfkxq=0&" +
+                        "bh_id=093B325FD80F5186E063768926D2959A&" +
+                        "xbm=1&" +
+                        "xslbdm=05&" +
+                        "mzm=01&" +
+                        "xz=4&" +
+                        "ccdm=3&" +
+                        "xsbj=1024&" +
                         "xkxnm=2024&" +
-                        "xkxqm=3&" +
+                        "xkxqm=12&" +
                         "kklxdm=" + kklxdm + "&" +
+                        "kch_id=" + kchId + "&" +
                         "xkkz_id=" + xkkzId)
                 .method("POST", body)
                 .addHeader("Cookie", cookie)
@@ -64,6 +79,7 @@ public class GccUtil {
         List<String> resultList = new ArrayList<>();
         try {
             Response response = client.newCall(request).execute();
+//            System.out.println(response.body().string());
             assert response.body() != null;
             List<Map> result = JSONObject.parseArray(response.body().string(), Map.class);
 
@@ -104,16 +120,14 @@ public class GccUtil {
                         "kklxdm=" + kklxdm + "&" +
                         "xklc=2&" +
                         "xkxnm=2024&" +
-                        "xkxqm=3&" +
+                        "xkxqm=12&" +
                         "jcxx_id=")
                 .method("POST", body)
                 .addHeader("Cookie", cookie)
                 .addHeader("User-Agent", UserAgent)
                 .build();
         try {
-            Result result = JSONObject.toJavaObject((JSON) JSON.parse(Objects.requireNonNull(client.newCall(request).execute().body()).string()), Result.class);
-            System.out.println(result);
-            return result;
+            return JSONObject.toJavaObject((JSON) JSON.parse(Objects.requireNonNull(client.newCall(request).execute().body()).string()), Result.class);
         } catch (IOException e) {
             System.err.println("选课失败！");
         }

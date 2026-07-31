@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class RoomRequests {
 
-    private static final String prefix = "http://k.longfish.site:7799";
+    private static final String prefix = "http://192.168.1.124:7799";
 
     // 创建房间请求
     public static String roomCreate(String roomNumber) {
