@@ -1,5 +1,7 @@
 package com.longfish.network;
 
+import com.longfish.Config;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,7 +10,7 @@ import java.net.URL;
 
 public class RoomRequests {
 
-    private static final String prefix = "http://192.168.1.124:7799";
+    private static final String prefix = Config.getServerApiBase();
 
     // 创建房间请求
     public static String roomCreate(String roomNumber) {
